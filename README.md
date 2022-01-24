@@ -6,8 +6,10 @@
 Dynamic DNS using nsd and ssh
 
 ## Usage
+Run against a bind file.
+
 ```/bin/bash
---USAGE--
+gohome /tmp/soh.re
 ```
 
 ## PreBuilt Binaries
