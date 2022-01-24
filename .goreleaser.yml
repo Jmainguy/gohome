@@ -12,6 +12,14 @@ builds:
     - windows
   goarch:
     - amd64
+    - arm64
+  goarm:
+    - 7
+  ignore:
+    - goos: windows
+      goarch: arm64
+    - goos: darwin
+      goarch: arm64
 archives:
 - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
   replacements:
@@ -24,11 +32,11 @@ archives:
     format: zip
 nfpms:
 - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-  homepage:  --REPOLINK--
-  description: --DESCRIPTION--
-  maintainer: --MAINTAINERNAME-- <--MAINTAINEREMAIL-->
+  homepage:  https://github.com/Jmainguy/gohome
+  description: Dynamic DNS using nsd and ssh
+  maintainer: Jonathan Seth Mainguy <jon@soh.re>
   license: GPLv2
-  vendor: --REPOOWNER--
+  vendor: Jmainguy
   release: 1
   replacements:
     amd64: x86_64
@@ -43,19 +51,19 @@ nfpms:
 
 brews:
   - tap:
-      owner: --REPOOWNER--
+      owner: Jmainguy
       name: homebrew-tap
     folder: Formula
-    homepage: --REPOLINK--
-    description: --DESCRIPTION--
+    homepage: https://github.com/Jmainguy/gohome
+    description: Dynamic DNS using nsd and ssh
     license: "GPL-2.0"
     commit_author:
-      name: --MAINTAINERNAME--
-      email: --MAINTAINEREMAIL--
+      name: Jonathan Seth Mainguy
+      email: jon@soh.re
     test: |
-      system "#{bin}/--BINARY--"
+      system "#{bin}/gohome"
     install: |
-      bin.install "--BINARY--"
+      bin.install "gohome"
 
 checksum:
   name_template: 'checksums.txt'
