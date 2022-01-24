@@ -19,7 +19,10 @@ func updateHome(zf *zonefile.Zonefile, IP string) (*zonefile.Zonefile, bool) {
 	for _, record := range zf.Entries() {
 		if bytes.Equal(record.Domain(), []byte("home")) {
 			if !bytes.Equal(record.Values()[0], []byte(IP)) {
-				record.SetValue(0, []byte(IP))
+				err := record.SetValue(0, []byte(IP))
+				if err != nil {
+					panic(err)
+				}
 				update = true
 			}
 			found = true
@@ -57,9 +60,17 @@ func incrementZone(zf *zonefile.Zonefile) *zonefile.Zonefile {
 		t := time.Now()
 		today := t.Format("20060102")
 		if strings.Contains(strconv.Itoa(serial), today) {
-			e.SetValue(2, []byte(strconv.Itoa(serial+1)))
+			err := e.SetValue(2, []byte(strconv.Itoa(serial+1)))
+			if err != nil {
+				panic(err)
+			}
+
 		} else {
-			e.SetValue(2, []byte(today+"01"))
+			err := e.SetValue(2, []byte(today+"01"))
+			if err != nil {
+				panic(err)
+			}
+
 		}
 		ok = true
 		break
