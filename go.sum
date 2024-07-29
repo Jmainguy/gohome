@@ -1,2 +1,4 @@
 github.com/bwesterb/go-zonefile v1.0.0 h1:ZSlRYCdfjYK9aeb/3RaFDe1QUmcoY4ntYb4DdAfYFU4=
 github.com/bwesterb/go-zonefile v1.0.0/go.mod h1:9IS4q4dptNSWk4Q6H+j9VG3D0el9jYujF+ruySi1DrI=
+github.com/bwesterb/go-zonefile v1.0.1 h1:tnVpe7msKrt3HRrK5mx8UEnnDN4MjfkuTquckOWVP5c=
+github.com/bwesterb/go-zonefile v1.0.1/go.mod h1:9IS4q4dptNSWk4Q6H+j9VG3D0el9jYujF+ruySi1DrI=
