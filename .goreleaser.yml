@@ -1,3 +1,4 @@
+version: 2
 env:
   - GO111MODULE=on
 before:
@@ -13,16 +14,19 @@ builds:
   goarch:
     - amd64
     - arm64
+
 archives:
-- name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-  replacements:
-    darwin: Darwin
-    linux: Linux
-    windows: Windows
-    amd64: x86_64
-  format_overrides:
-  - goos: windows
-    format: zip
+  - name_template: >-
+      {{- .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end -}}
+    format_overrides:
+      - goos: windows
+        format: zip
+
 nfpms:
 - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
   homepage:  https://github.com/Jmainguy/gohome
@@ -31,8 +35,6 @@ nfpms:
   license: GPLv2
   vendor: Jmainguy
   release: 1
-  replacements:
-    amd64: x86_64
   overrides:
       rpm:
         file_name_template: "{{ .ProjectName }}-{{ .Version }}-{{.Release}}.{{ .Arch }}"
@@ -41,22 +43,6 @@ nfpms:
   formats:
   - deb
   - rpm
-
-brews:
-  - tap:
-      owner: Jmainguy
-      name: homebrew-tap
-    folder: Formula
-    homepage: https://github.com/Jmainguy/gohome
-    description: Dynamic DNS using nsd and ssh
-    license: "GPL-2.0"
-    commit_author:
-      name: Jonathan Seth Mainguy
-      email: jon@soh.re
-    test: |
-      system "#{bin}/gohome"
-    install: |
-      bin.install "gohome"
 
 checksum:
   name_template: 'checksums.txt'

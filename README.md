@@ -15,16 +15,7 @@ gohome /tmp/soh.re
 ## PreBuilt Binaries
 Grab Binaries from [The Releases Page](https://github.com/Jmainguy/gohome/releases)
 
-## Install
-
-### Homebrew
-
-```/bin/bash
-brew install Jmainguy/tap/gohome
-```
-
 ## Build
 ```/bin/bash
-export GO111MODULE=on
 go build
 ```

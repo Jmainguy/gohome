@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"strconv"
@@ -98,7 +98,7 @@ func saveFile(zoneFilename string, zf *zonefile.Zonefile) {
 
 func loadZone(zoneFilename string) *zonefile.Zonefile {
 	// Load zonefile
-	data, ioerr := ioutil.ReadFile(zoneFilename)
+	data, ioerr := os.ReadFile(zoneFilename)
 	if ioerr != nil {
 		fmt.Println(zoneFilename, ioerr)
 		os.Exit(2)
@@ -119,7 +119,7 @@ func getIP() string {
 		panic(err)
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 
 	if err != nil {
 		panic(err)
